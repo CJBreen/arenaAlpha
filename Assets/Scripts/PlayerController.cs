@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
     }
     private void rotatePlayer() {
         // Getting mouse input
-        float mouse_X = Input.GetAxis("Mouse X") * Time.deltaTime * mouseSens_X;
-        float mouse_Y = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSens_Y;
+        float mouse_X = Input.GetAxis("Mouse X") * Time.fixedDeltaTime * mouseSens_X;
+        float mouse_Y = Input.GetAxis("Mouse Y") * Time.fixedDeltaTime * mouseSens_Y;
 
         rotation_X += mouse_X;
 
