@@ -29,12 +29,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundDef;
     public float playerHeight;
     public KeyCode jumpKey = KeyCode.Space;
+    public float fieldOfView = 60f;
 
 
     private Rigidbody playerRb;
     private float rotation_X;
     private float rotation_Y;
-    private Transform camera;
+    private Transform cameraTransform;
     private float groundCheck_heightOffset = 0.7f;
     private bool isJump;
     private bool isOnGround;
@@ -46,7 +47,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         playerRb = GetComponent<Rigidbody>();
-        camera = GameObject.Find("Main Camera").transform;
+        cameraTransform = GameObject.Find("Main Camera").transform;
+        Camera.main.fieldOfView = fieldOfView;
 
         // Setting Rigidbody settings
         playerRb.mass = 0.1f;
@@ -110,9 +112,9 @@ public class PlayerController : MonoBehaviour
 
     private void cameraController() {
         // Setting the cameras position to the player + a Y value so that you can have the camera in the players head...
-        camera.position = transform.position + Vector3.up * cameraOffset_Y;
+        cameraTransform.position = transform.position + Vector3.up * cameraOffset_Y;
         // Rotating the camera on the X & Y axis
-        camera.rotation = Quaternion.Euler(rotation_Y, rotation_X, 0);
+        cameraTransform.rotation = Quaternion.Euler(rotation_Y, rotation_X, 0);
     }
     private void playerSpeed() {
         Vector3 playerVelocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
