@@ -14,7 +14,7 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 currentGrapplePosition;
     public static bool gamePaused = false;
     public AudioClip grappleSound;
-    //public AudioSource speaker;
+    public AudioSource speaker;
 
     // Awake method
     void Awake()
@@ -49,11 +49,11 @@ public class GrapplingGun : MonoBehaviour
     {
         RaycastHit hit;
         
-        //speaker.enabled = true; // Enables the speaker so the user can hear the sound effect
+        speaker.enabled = true; // Enables the speaker so the user can hear the sound effect
         
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) // If the player can grapple
         {
-            //speaker.PlayOneShot(grappleSound, 3f); // Plays sound affect
+            speaker.PlayOneShot(grappleSound, 3f); // Plays sound affect
             grapplePoint = hit.point; // Sets grapple point to where the user hits
             joint = player.gameObject.AddComponent<SpringJoint>(); // Creates spring point between player and grapple location
             joint.autoConfigureConnectedAnchor = false; // Sets an anchor
@@ -65,8 +65,8 @@ public class GrapplingGun : MonoBehaviour
             joint.minDistance = distanceFromPoint * 0.1f; // Maximum distance player will be kept from grapple point
 
             // These can be adjusted very easily to change the way the grappling gun works
-            joint.spring = 9f; // Spring
-            joint.damper = 10f; // Damper
+            joint.spring = 5f; // Spring
+            joint.damper = 5f; // Damper
             joint.massScale = 10f; // Mass
 
             lineRender.positionCount = 2; // Renders the rope
