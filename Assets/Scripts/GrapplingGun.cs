@@ -8,7 +8,7 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, camera, player;
-    private float maxDistance = 100f;
+    public float maxDistance = 100f;
     private SpringJoint joint;
     public float distanceFromPoint;
     private Vector3 currentGrapplePosition;
@@ -49,11 +49,9 @@ public class GrapplingGun : MonoBehaviour
     {
         RaycastHit hit;
         
-        speaker.enabled = true; // Enables the speaker so the user can hear the sound effect
         
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) // If the player can grapple
         {
-            speaker.PlayOneShot(grappleSound, 3f); // Plays sound affect
             grapplePoint = hit.point; // Sets grapple point to where the user hits
             joint = player.gameObject.AddComponent<SpringJoint>(); // Creates spring point between player and grapple location
             joint.autoConfigureConnectedAnchor = false; // Sets an anchor
