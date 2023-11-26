@@ -7,6 +7,7 @@ public class TurretControllerSniper : MonoBehaviour
     public LayerMask wallsDef;
     public float turretViewHeight;
     public float shootTimer;
+    public float rotationOffset;
 
     private Transform playerPos;
     private GameObject player;
@@ -55,6 +56,7 @@ public class TurretControllerSniper : MonoBehaviour
             Vector3 turretRotation = playerPos.position - transform.position;
             turretRotation.y = 0;
             transform.rotation = Quaternion.LookRotation(turretRotation, Vector3.up);
+            transform.rotation = transform.rotation * Quaternion.Euler(1, rotationOffset, 1);
         }
     }
     private void drawLine() {
