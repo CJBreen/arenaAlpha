@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private float groundCheck_heightOffset = 0.7f;
     private bool isJump;
     private bool isOnGround;
+    private GUI guiScript;
     
     void Start() {
 
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         playerRb = GetComponent<Rigidbody>();
+        guiScript = GameObject.Find("GUI").GetComponent<GUI>();
         cameraTransform = GameObject.Find("Main Camera").transform;
         Camera.main.fieldOfView = fieldOfView;
 
@@ -57,24 +59,27 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update() {
-        // Player rotation
-        rotatePlayer();
-        // Camera rotation
-        cameraController();
+        if (!guiScript.isEsc) {
+            // Player rotation
+            rotatePlayer();
+            // Camera rotation
+            cameraController();
+        }
     }
 
     void FixedUpdate() {
-        // Checking if the player is on the ground
-        isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight*groundCheck_heightOffset, groundDef);
-
-        // Moving the player
-        movePlayer();
-        // Speedlimiting the player
-        playerSpeed();
-        // The player's jump
-        Jump();
-        // The player's gravity
-        playerGravity();
+        if (!guiScript.isEsc) {
+            // Checking if the player is on the ground
+            isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight*groundCheck_heightOffset, groundDef);
+            // Moving the player
+            movePlayer();
+            // Speedlimiting the player
+            playerSpeed();
+            // The player's jump
+            Jump();
+            // The player's gravity
+            playerGravity();
+        }
         
     }
 

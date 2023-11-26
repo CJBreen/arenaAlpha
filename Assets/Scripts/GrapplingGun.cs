@@ -17,14 +17,12 @@ public class GrapplingGun : MonoBehaviour
     public AudioSource speaker;
 
     // Awake method
-    void Awake()
-    {
+    void Awake() {
         lineRender = GetComponent<LineRenderer>(); // Renders the line for the grapple animation
     }
 
     // Update method
-    void Update()
-    {
+    void Update() {
         if (gamePaused == false) // If the game is not paused
         {
             if (Input.GetMouseButtonDown(0)) // If left click is held
